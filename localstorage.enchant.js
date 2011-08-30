@@ -38,5 +38,7 @@ enchant.Game.prototype.preloadToLocalStorage = function(assets){
     if (!(assets instanceof Array)) {
         assets = Array.prototype.slice.call(arguments);
     }
-		enchant.localstorage.load(this,assets);
+		for(var i=0;i<assets.length;i++){
+			enchant.localstorage.load(this,assets[i]);
+		}
 }
