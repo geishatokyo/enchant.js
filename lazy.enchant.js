@@ -4,7 +4,7 @@
  * assetを遅延ロードする。
  * 内部的にはenchant.Game#loadを呼び出すだけです。
  * 
- * 読み込みの完了を補足するためには、game.assets[url]のloadイベントにaddEventlistenerすればたぶん大丈夫です。
+ * 読み込みの完了を捕捉するためには、game.assets[url]のloadイベントにaddEventlistenerすればたぶん大丈夫です。
  *
  */
 
