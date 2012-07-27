@@ -1746,6 +1746,21 @@ enchant.Game._loadFuncs['ogg'] = function(src, callback, ext) {
     this.assets[src].addEventListener('load', callback);
 };
 
+// js
+enchant.Game._loadFuncs['js']  = function(src, callback) {
+  var ele = document.createElement("script");
+  ele.type = "text/javascript";
+  ele.src = src;
+  ele.onload = callback;
+  ele.onerror = function() {
+    throw new Error('Cannot load an asset: ' + src);
+  };
+  document.body.appendChild(ele);
+};
+
+
+
+
 /**
 [lang:ja]
  * 現在のGameインスタンス.
@@ -4106,11 +4121,10 @@ window.addEventListener("message", function(msg, origin){
 enchant.Sound.enabledInMobileSafari = false;
 
 function findExt(path) {
-    var matched = path.match(/\.\w+$/);
+    var matched = path.match(/\.\w+[#\w]+$/);
     if (matched && matched.length > 0) {
-        return matched[0].slice(1).toLowerCase();
+      return matched[0].split('#')[0].slice(1).toLowerCase();
     }
-
     // for data URI
     if (path.indexOf('data:') === 0) {
         return path.split(/[\/;]/)[1].toLowerCase();
