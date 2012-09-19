@@ -1,5 +1,9 @@
 /**
  * enchant();
+ * Preparation for using enchant.js.
+ * (Exporting enchant.js class to global namespace.
+ *  ex. enchant.Sprite -> Sprite etc..)
+ *
  * enchant.js を使う前に必要な処理。
  * (enchant.js 本体や、読み込んだプラグインの中で定義されている enchant.Foo, enchant.Plugin.Bar などのクラスを、
  *  それぞれグローバルの Foo, Bar にエクスポートする。)
@@ -8,6 +12,10 @@ enchant();
 
 /*
  * window.onload
+ *
+ * The function which will be executed after loading page.
+ * Command in enchant.js such as "new Game();" will cause an error if executed before entire page is loaded.
+ *
  * ページがロードされた際に実行される関数。
  * すべての処理はページがロードされてから行うため、 window.onload の中で実行する。
  * 特に new Game(); は、<body> タグが存在しないとエラーになるので注意。
@@ -15,6 +23,8 @@ enchant();
 window.onload = function(){
     /**
      * new Game(width, height)
+     *
+     * Make instance of enchant.Game class. Set window size to 320 x 320
      * Game オブジェクトを作成する。
      * 画面の大きさは 320ピクセル x 320ピクセル に設定する。
      */
@@ -22,19 +32,23 @@ window.onload = function(){
 
     /**
      * Game.fps
-     * ゲームの fps (frame per second) を指定する。
-     * この場合、1秒間あたり15回画面が更新される。
+     *
+     * Set fps (frame per second) in this game to 15.
+     * ゲームの fps (frame per second) を指定する。この場合、1秒間あたり15回画面が更新される。
      */
     game.fps = 15;
     /**
      * Game#preload
-     * 必要なファイルを相対パスで引数に指定する。
-     * ファイルはすべて、ゲームが始まる前にロードされる。
+     *
+     * You can preload all assets files before starting the game.
+     * Set needed file lists in relative/absolute path for attributes of Game#preload
+     * 必要なファイルを相対パスで引数に指定する。 ファイルはすべて、ゲームが始まる前にロードされる。
      */
     game.preload("chara1.png");
     
     /**
      * Game#onload
+     *
      * ロードが完了した直後に実行される関数を指定している。
      * onload プロパティは load イベントのリスナとして働くので、以下の2つの書き方は同じ意味。
      *
